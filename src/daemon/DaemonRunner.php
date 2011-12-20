@@ -138,6 +138,8 @@ class DaemonRunner
 		$callback = $this->getCallback();
 		$parent = $this->getParent();
 
+		$created = 0;
+
 		$this->log->info('initializing run, parallel: %d', $parallel);
 
 		# main loop
@@ -168,6 +170,8 @@ class DaemonRunner
 				if ($running < $parallel && !$this->exit) {
 					$child = $parent->fork($callback);
 
+					$created++;
+
 					# finished quicker than we thought
 					if (isset($this->signalQueue[$child->getPid()])) {
 						$parent->handleSignal(SIGCHLD, $pid, $this->signalQueue[$pid]);
@@ -178,7 +182,10 @@ class DaemonRunner
 					$this->badcount = 0;
 				}
 
-				usleep(static::$SLEEP);
+				# don't sleep until we have created the initial childs
+				if ($created >= $parallel) {
+					usleep(static::$SLEEP);
+				}
 			} catch (DaemonException $e) {
 				$this->logger->warn($e);
 				$this->bacount++;
