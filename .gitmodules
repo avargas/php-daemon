@@ -1,0 +1,6 @@
+[submodule "vendor/php-loggy"]
+	path = vendor/php-loggy
+	url = https://github.com/avargas/php-loggy.git
+[submodule "vendor/getopt-php"]
+	path = vendor/getopt-php
+	url = https://github.com/avargas/getopt-php.git
