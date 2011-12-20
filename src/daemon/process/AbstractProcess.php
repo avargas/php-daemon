@@ -172,9 +172,9 @@ abstract class AbstractProcess
 
 	public function on ($signal, $callback = null)
 	{
-		$this->log->debug('registering pcntl signal %d', $signal);
-
 		if (!isset($this->signalCallbacks[$signal])) {
+			$this->log->debug('registering pcntl signal %d', $signal);
+
 			$this->signalCallbacks[$signal] = array();
 			pcntl_signal($signal, array($this, 'handleSignal'));
 		}
