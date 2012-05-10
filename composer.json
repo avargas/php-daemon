@@ -1,0 +1,18 @@
+{
+	"name": "trukin/php-daemon",
+	"description": "Simple library to create PHP Daemons",
+	"type": "library",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Angelo Vargas",
+			"email": "trukin@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=5.3.0"
+	},
+	"autoload": {
+		"psr-0": {"daemon": "src"}
+	}
+}
